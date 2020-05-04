@@ -1,0 +1,5 @@
+rootProject.name = 'test-automation-framework-spring'
+
+include 'plain-java'
+include 'spring'
+include 'spring-boot'
