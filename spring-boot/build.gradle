@@ -1,3 +1,7 @@
+plugins {
+	id "com.github.johnrengelman.shadow" version "5.2.0"
+}
+
 apply plugin: 'org.springframework.boot'
 
 dependencies {
@@ -8,4 +12,27 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 //	testImplementation 'org.springframework.kafka:spring-kafka-test'
+}
+
+import com.github.jengelman.gradle.plugins.shadow.transformers.*
+shadowJar {
+    zip64 true
+    duplicatesStrategy = DuplicatesStrategy.WARN
+    manifest {
+        attributes 'Implementation-Title': 'Testing Jar File',
+                'Main-Class': 'org.junit.platform.console.ConsoleLauncher'
+    }
+    from sourceSets.test.output
+    configurations = [project.configurations.testRuntimeClasspath]
+    exclude '**/Log4j2Plugins.dat'
+
+    // Required for Spring
+    mergeServiceFiles()
+    append 'META-INF/spring.handlers'
+    append 'META-INF/spring.schemas'
+    append 'META-INF/spring.tooling'
+    transform(PropertiesFileTransformer) {
+        paths = ['META-INF/spring.factories' ]
+        mergeStrategy = "append"
+    }
 }
