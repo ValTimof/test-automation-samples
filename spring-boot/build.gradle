@@ -14,6 +14,10 @@ dependencies {
 	}
 }
 
+test {
+    exclude 'com/github/timofeevvr/test/automation/framework/unit/**'
+}
+
 import com.github.jengelman.gradle.plugins.shadow.transformers.*
 shadowJar {
     zip64 true
