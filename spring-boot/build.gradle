@@ -12,7 +12,6 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-	testImplementation 'org.springframework.kafka:spring-kafka-test'
 }
 
 import com.github.jengelman.gradle.plugins.shadow.transformers.*
