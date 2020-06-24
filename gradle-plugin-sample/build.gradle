@@ -8,7 +8,7 @@ gradlePlugin {
     plugins {
         samplePlugin {
             id = 'com.github.timofeevvr.gradle.plugin.sample'
-            implementationClass = 'com.github.timofeevvr.gradle.plugin.sample'
+            implementationClass = 'com.github.timofeevvr.gradle.plugin.SamplePlugin'
         }
     }
 }
@@ -35,26 +35,4 @@ dependencies {
 
     testImplementation platform("org.spockframework:spock-bom:2.0-M1-groovy-2.5")
     testImplementation "org.spockframework:spock-core"
-}
-
-artifactory {
-    String repo = version.endsWith('SNAPSHOT') ? 'plugins-snapshot-local' : 'plugins-release-local'
-    contextUrl = 'https://eis.jfrog.io/eis'
-
-    publish {
-        repository {
-            repoKey = repo
-            username = ArtifactoryUser
-            password = ArtifactoryPassword
-            maven = true
-        }
-
-        defaults {
-            publications 'pluginMaven', 'sdcPluginPluginMarkerMaven'
-            publishBuildInfo = false
-            publishIvy = false
-            publishArtifacts = true
-            publishPom = true
-        }
-    }
 }

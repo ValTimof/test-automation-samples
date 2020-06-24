@@ -31,12 +31,11 @@ allprojects {
 						'junit-jupiter.version': '5.6.2'
 				])
 			}
-			mavenBom 'software.amazon.awssdk:bom:2.13.42'
+			mavenBom('software.amazon.awssdk:bom:2.13.42')
 		}
 	}
 
 	configurations.all {
-		exclude module: 'spring-boot-starter-logging'
 		exclude group: 'org.junit.vintage'
 	}
 

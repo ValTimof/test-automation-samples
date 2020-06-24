@@ -1,4 +1,4 @@
-package com.github.timofeevvr.test.automation.framework;
+package com.github.timofeevvr.test.automation.samples;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

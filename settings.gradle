@@ -1,4 +1,6 @@
 rootProject.name = 'test-automation-samples'
 
+include 'gradle-plugin-sample'
+include 'microservice-integration-testing'
 include 'spring-framework-integration'
 include 'spring-boot-integration'

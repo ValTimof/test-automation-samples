@@ -1,4 +1,4 @@
-package com.github.timofeevvr.test.automation.framework;
+package com.github.timofeevvr.test.automation.samples;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

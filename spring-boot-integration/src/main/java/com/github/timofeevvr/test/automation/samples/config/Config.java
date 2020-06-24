@@ -1,10 +1,6 @@
-package com.github.timofeevvr.test.automation.framework.config;
+package com.github.timofeevvr.test.automation.samples.config;
 
-import com.github.timofeevvr.test.automation.framework.steps.MongoSteps;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import org.apache.kafka.common.protocol.types.Field;
-import org.springframework.beans.factory.annotation.Value;
+import com.github.timofeevvr.test.automation.samples.steps.MongoSteps;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
