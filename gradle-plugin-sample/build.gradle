@@ -1,0 +1,60 @@
+plugins {
+    id 'groovy'
+    id 'maven-publish'
+    id 'java-gradle-plugin'
+}
+
+gradlePlugin {
+    plugins {
+        samplePlugin {
+            id = 'com.github.timofeevvr.gradle.plugin.sample'
+            implementationClass = 'com.github.timofeevvr.gradle.plugin.sample'
+        }
+    }
+}
+
+sourceSets {
+    main {
+        resources.srcDirs "src/main/dsl"
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    gradlePluginPortal()
+}
+
+dependencies {
+    implementation localGroovy()
+
+    implementation 'io.freefair.gradle:lombok-plugin:5.1.0'
+    implementation 'org.sonarqube:org.sonarqube.gradle.plugin:2.8'
+    implementation 'io.spring.dependency-management:io.spring.dependency-management.gradle.plugin:1.0.9.RELEASE'
+    implementation 'org.springframework.boot:org.springframework.boot.gradle.plugin:2.3.1.RELEASE'
+
+    testImplementation platform("org.spockframework:spock-bom:2.0-M1-groovy-2.5")
+    testImplementation "org.spockframework:spock-core"
+}
+
+artifactory {
+    String repo = version.endsWith('SNAPSHOT') ? 'plugins-snapshot-local' : 'plugins-release-local'
+    contextUrl = 'https://eis.jfrog.io/eis'
+
+    publish {
+        repository {
+            repoKey = repo
+            username = ArtifactoryUser
+            password = ArtifactoryPassword
+            maven = true
+        }
+
+        defaults {
+            publications 'pluginMaven', 'sdcPluginPluginMarkerMaven'
+            publishBuildInfo = false
+            publishIvy = false
+            publishArtifacts = true
+            publishPom = true
+        }
+    }
+}

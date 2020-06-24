@@ -1,4 +1,4 @@
-rootProject.name = 'test-automation-framework-spring'
+rootProject.name = 'test-automation-samples'
 
-include 'spring'
-include 'spring-boot'
+include 'spring-framework-integration'
+include 'spring-boot-integration'
