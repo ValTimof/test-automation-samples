@@ -1,0 +1,54 @@
+plugins {
+    id "org.springframework.boot" version "2.3.1.RELEASE"
+}
+
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file("src/integration-test/java")
+        }
+        resources.srcDir file("src/integration-test/resources")
+    }
+}
+
+configurations {
+    integrationTestImplementation.extendsFrom testImplementation
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    integrationTestImplementation "io.rest-assured:rest-assured"
+    integrationTestImplementation "org.testcontainers:junit-jupiter:1.14.3"
+    integrationTestImplementation "org.testcontainers:mongodb:1.14.3"
+}
+
+task integrationTest(type: Test) {
+    useJUnitPlatform()
+
+    testLogging {
+        exceptionFormat "full"
+        events "started", "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+
+    group 'verification'
+}
+
+
+task jacocoIntegrationTestReport(type: JacocoReport) {
+    executionData files("${buildDir}/jacoco/integrationTest.exec")
+    sourceSets sourceSets.main
+    reports {
+        html.enabled true
+        html.destination file("${buildDir}/reports/jacoco/integrationTest/html")
+        xml.enabled true
+        xml.destination file("${buildDir}/reports/jacoco/integrationTest/jacocoTestReport.xml")
+    }
+}
+
+integrationTest.finalizedBy jacocoIntegrationTestReport
