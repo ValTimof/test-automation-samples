@@ -15,11 +15,15 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+    testImplementation 'org.springframework.kafka:spring-kafka-test'
 }
 
 test {
     exclude 'com/github/timofeevvr/test/automation/framework/unit/**'
 }
+
+bootJar.enabled false
 
 import com.github.jengelman.gradle.plugins.shadow.transformers.*
 shadowJar {
