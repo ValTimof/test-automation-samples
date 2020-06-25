@@ -2,9 +2,13 @@ package com.github.timofeevvr.test.automation.samples;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 
-@Data
-@AllArgsConstructor
 public class MainPage {
-    private String text;
+    @Getter
+    private final String text;
+
+    public MainPage(String text) {
+        this.text = text;
+    }
 }

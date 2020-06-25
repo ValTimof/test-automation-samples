@@ -2,21 +2,28 @@ package com.github.timofeevvr.test.automation.samples;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@ContextConfiguration(classes = MainPage.class)
+@SpringJUnitConfig(classes = { TestConfig.class, ExampleService.class })
+@TestPropertySource(locations = "/application.properties")
 public class MainPageTest {
 
     @Autowired
     MainPage mainPage;
-    @Autowired
-    ExampleService exampleService;
 
     @Test
-    void checkSpring() {
+    void checkSpringConfiguration() {
         assertEquals("text", mainPage.getText());
+    }
 
+    @Test
+    void checkProperties(@Autowired ExampleService exampleService) {
+        exampleService.printParameter();
+        assertEquals("value", exampleService.getParameter());
     }
 }
